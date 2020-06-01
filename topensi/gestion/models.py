@@ -1,6 +1,6 @@
 from django.db import models
 from month.models import MonthField
-from django.contrib.auth.models import her
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Client(models.Model):
