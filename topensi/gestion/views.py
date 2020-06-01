@@ -1,6 +1,6 @@
 import csv
 import datetime
-from urllib.parse import urlparse  # Python 3
+from urllib.parse import urlparse
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
