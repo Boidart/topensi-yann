@@ -37,8 +37,8 @@ class Info(models.Model):
     dateInstallation = models.DateField(null=True)
 
 class Droit(models.Model):
-    utilisateur =  models.ForeignKey(User, on_delete=models.CASCADE)
-    autorisation = models.ForeignKey(User, on_delete=models.CASCADE)
+    utilisateur =  models.ForeignKey(User, on_delete=models.CASCADE, related_name="userdroit")
+    autorisation = models.ForeignKey(User, on_delete=models.CASCADE, related_name="autorisation")
     
     def __unicode__(self):
         return unicode(self.month) 
