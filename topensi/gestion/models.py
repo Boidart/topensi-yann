@@ -1,5 +1,6 @@
 from django.db import models
 from month.models import MonthField
+from django.contrib.auth.models import her
 
 # Create your models here.
 class Client(models.Model):
@@ -14,17 +15,30 @@ class Type(models.Model):
 class Etat(models.Model):
     nom = models.CharField(max_length=50, unique=True)
 
-class Info(models.Model):
+class InfoVente(models.Model):
     cli = models.ForeignKey(Client, on_delete=models.CASCADE)
     partenaire = models.ForeignKey(Partenaire, on_delete=models.CASCADE)
     typ = models.ForeignKey(Type, on_delete=models.CASCADE)
-    marge = models.FloatField(null=True)
+    Pachat = models.FloatField(null=True)
+    Pvente = models.FloatField(null=True)
     recurrent = models.FloatField(null=True)
+    marge = models.FloatField(null=True)
+
+
+class Info(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cli = models.ForeignKey(Client, on_delete=models.CASCADE)
+    partenaire = models.ForeignKey(Partenaire, on_delete=models.CASCADE)
+    typ = models.ForeignKey(Type, on_delete=models.CASCADE)
     etat = models.ForeignKey(Etat, on_delete=models.CASCADE)
     facture = models.BooleanField()
     dateCreation = MonthField()
     dateCloture = MonthField()
     dateInstallation = models.DateField(null=True)
+
+class Droit(models.Model):
+    utilisateur =  models.ForeignKey(User, on_delete=models.CASCADE)
+    autorisation = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __unicode__(self):
-        return unicode(self.month)
+        return unicode(self.month) 
