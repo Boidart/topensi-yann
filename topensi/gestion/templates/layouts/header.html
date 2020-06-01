@@ -41,7 +41,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form method="post" id="login" action="/login">
+                  <form method="post" id="login" action="/login/"> {% csrf_token %}
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nom d'utilisateur</label>
                       <input name="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter votre nom d'utilisateur">
