@@ -11,6 +11,7 @@ from gestion.models import Etat
 from gestion.models import Client
 from gestion.models import Partenaire
 from gestion.models import Type
+from django.contrib.auth.models import User
 import ipaddress
 from django.http import JsonResponse
 import month
@@ -30,6 +31,19 @@ class IndexView(TemplateView):
     type = Type.objects.all()
     return render(request, self.template_name, {'info' : info, 'client': client, 'partenaire': partenaire, 'type' : type, 'etat': etat})
 
+class LoginView(TemplateView):
+  template_name = 'index.html'
+  def post(self, request, **kwargs):
+    username = request.POST.get('username', False)
+    password = request.POST.get('password', False)
+    user = authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+      login(request, user)
+      messages.success(request, 'Connexion réussie')
+    else:
+        messages.error(request, 'Mauvais mot de passe moodle')
+    return HttpResponseRedirect( "/" )
+  
 class AddView(TemplateView):
   template_name = 'add.html'
   def get(self, request, **kwargs):
